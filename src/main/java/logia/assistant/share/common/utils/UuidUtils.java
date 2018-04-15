@@ -1,7 +1,7 @@
 package logia.assistant.share.common.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.util.Base64Utils;
+import java.security.SecureRandom;
+import java.util.UUID;
 
 /**
  * The Class UuidUtils.
@@ -10,15 +10,59 @@ import org.springframework.util.Base64Utils;
  */
 public final class UuidUtils {
     
+    /** The Constant THREAD_LOCAL_SECURE_RANDOM. */
+    private static final ThreadLocal<SecureRandom> THREAD_LOCAL_SECURE_RANDOM = new ThreadLocal<SecureRandom>();
+    
     /**
      * Generate uui.
      *
-     * @param id the id
      * @return the string
      */
-    public static String generateUui(Long id) {
-        int length = 19 - id.toString().length();
-        String randomString = id.toString() + RandomStringUtils.randomNumeric(length);
-        return Base64Utils.encodeToUrlSafeString(randomString.getBytes());
+    public static String newSecureUUIDString() {
+        return newSecureUUID().toString();
+    }
+    
+    /**
+     * New secure UUID.
+     *
+     * @return the uuid
+     */
+    public static UUID newSecureUUID() {
+        byte[] data = new byte[16];
+        getSecure().nextBytes(data);
+
+        // clear version
+        data[6] &= 0x0f;
+        // set to version 4
+        data[6] |= 0x40;
+        // clear variant
+        data[8] &= 0x3f;
+        // set to IETF variant
+        data[8] |= 0x80;
+
+        long mostSigBits = 0;
+        long leastSigBits = 0;
+        assert data.length == 16 : "data must be 16 bytes in length";
+        for (int i = 0; i < 8; i++) {
+            mostSigBits = (mostSigBits << 8) | (data[i] & 0xff);
+        }
+        for (int i = 8; i < 16; i++) {
+            leastSigBits = (leastSigBits << 8) | (data[i] & 0xff);
+        }
+        return new UUID(mostSigBits, leastSigBits);
+    }
+    
+    /**
+     * Gets the secure.
+     *
+     * @return the secure
+     */
+    private static SecureRandom getSecure() {
+        SecureRandom random = THREAD_LOCAL_SECURE_RANDOM.get();
+        if (random == null) {
+            random = new SecureRandom();
+            THREAD_LOCAL_SECURE_RANDOM.set(random);
+        }
+        return random;
     }
 }
