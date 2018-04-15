@@ -3,6 +3,8 @@ package logia.assistant.share.common.utils;
 import java.security.SecureRandom;
 import java.util.UUID;
 
+import org.springframework.util.Base64Utils;
+
 /**
  * The Class UuidUtils.
  *
@@ -19,7 +21,7 @@ public final class UuidUtils {
      * @return the string
      */
     public static String newSecureUUIDString() {
-        return newSecureUUID().toString();
+        return Base64Utils.encodeToUrlSafeString(newSecureUUID().toString().getBytes());
     }
     
     /**
