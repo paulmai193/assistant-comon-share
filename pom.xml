@@ -29,6 +29,11 @@
   		<artifactId>validation-api</artifactId>
   		<version>${validation-api.version}</version>
   	</dependency>
+  	<dependency>
+  	    <groupId>org.apache.commons</groupId>
+  	    <artifactId>commons-lang3</artifactId>
+  	    <version>3.5</version>
+  	</dependency>
   </dependencies>
   <properties>
   	<hibernate.version>5.2.12.Final</hibernate.version>
