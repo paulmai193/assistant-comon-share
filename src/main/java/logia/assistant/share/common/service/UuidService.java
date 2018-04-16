@@ -1,5 +1,6 @@
 package logia.assistant.share.common.service;
 
+import java.util.Optional;
 
 /**
  * The Interface UuidService.
@@ -10,11 +11,11 @@ package logia.assistant.share.common.service;
 public interface UuidService<T> {
 
     /**
-     * Gets the by uuid.
+     * Find by UUID.
      *
-     * @param Uuid the uuid
-     * @return the by uuid
+     * @param uuid the UUID
+     * @return the by UUID
      */
-    public T getByUuid(String Uuid);
+    public Optional<T> findByUuid(String uuid);
     
 }
