@@ -34,14 +34,14 @@ public interface EntityService<D, E, K extends Serializable> {
      *
      * @return the list entities mapped to DTOs
      */
-    List<D> findAll();
+    List<D> findAllDtos();
     
     /**
      * Find all entities.
      *
      * @return the list entities
      */
-    List<D> findAllEntities();
+    List<E> findAllEntities();
     
     /**
      * Find the "id" entity mapped to DTO.
@@ -83,10 +83,26 @@ public interface EntityService<D, E, K extends Serializable> {
     D mapToDto(E entity);
     
     /**
+     * Map list entities to list DTOs.
+     *
+     * @param entities the entities
+     * @return the list mapped DTOs
+     */
+    List<D> mapToDtos(List<E> entities);
+    
+    /**
      * Map DTO to entity.
      *
      * @param dto the DTO
      * @return the entity
      */
     E mapToEntity(D dto);
+    
+    /**
+     * Map list DTOs to list entities.
+     *
+     * @param dtos the DTOs
+     * @return the list mapped entities
+     */
+    List<E> mapToEntities(List<D> dtos);
 }
