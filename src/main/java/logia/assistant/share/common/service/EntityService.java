@@ -25,9 +25,10 @@ public interface EntityService<D, E, K extends Serializable> {
      * Save the entity.
      *
      * @param entity the entity
+     * @param flush the flag to flushes changes instantly or not.
      * @return the saved entity
      */
-    E saveEntity(E entity);
+    E saveEntity(E entity, boolean flush);
     
     /**
      * Find all entities.
