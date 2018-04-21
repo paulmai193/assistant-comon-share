@@ -20,8 +20,8 @@ public abstract class AbstractUuidEntity extends AbstractAuditingEntity {
     private static final long serialVersionUID = 1L;
     
     /** The uuid. */
-    @Size(min = 1, max = 10)
-    @Column(length = 10, unique = true, nullable = true)
+    @Size(min = 1, max = 50)
+    @Column(length = 50, unique = true, nullable = true)
     private String uuid;
     
     /**
