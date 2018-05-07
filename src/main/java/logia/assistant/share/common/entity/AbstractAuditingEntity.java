@@ -20,13 +20,11 @@ import javax.persistence.MappedSuperclass;
  *
  * @author Dai Mai
  */
+@SuppressWarnings("serial")
 @MappedSuperclass
 @Audited
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity implements Serializable {
-
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
 
     /** The created by. */
     @CreatedBy

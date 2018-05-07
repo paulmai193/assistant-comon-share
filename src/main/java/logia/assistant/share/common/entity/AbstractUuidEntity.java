@@ -1,48 +1,39 @@
 package logia.assistant.share.common.entity;
 
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
-
-import logia.assistant.share.common.utils.UuidUtils;
 
 /**
  * The Class AbstractUuidEntity.
  *
  * @author Dai Mai
+ * @param <ID>
  */
+@SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class AbstractUuidEntity extends AbstractAuditingEntity {
+public abstract class AbstractUuidEntity extends AbstractAuditingEntity implements IEntity {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    
     /** The uuid. */
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = true)
-    private String uuid;
-    
+    private String            uuid;
+
     /**
      * Instantiates a new abstract uuid entity.
      */
     public AbstractUuidEntity() {
-        this.uuid = UuidUtils.newSecureUUIDString();
     }
-    
+
     /**
      * Gets the uuid.
      *
      * @return the uuid
      */
     public String getUuid() {
-        if (Objects.isNull(this.uuid)) {
-            this.setUuid(UuidUtils.newSecureUUIDString());
-        }
         return this.uuid;
     }
-    
+
     /**
      * Sets the uuid.
      *
@@ -51,5 +42,5 @@ public abstract class AbstractUuidEntity extends AbstractAuditingEntity {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
+
 }
