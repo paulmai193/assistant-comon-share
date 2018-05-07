@@ -40,4 +40,11 @@ public interface UuidRepository<T extends AbstractUuidEntity, ID extends Number>
      */
     List<T> findByUuidIsNull();
     
+    /**
+     * Find first order by id desc.
+     *
+     * @return the t
+     */
+    List<T> findAllByOrderByIdDesc();
+    
 }
